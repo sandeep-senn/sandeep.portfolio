@@ -12,10 +12,10 @@ export default function HomePage() {
   return (
     <main className="scroll-smooth">
       <Hero />
-      <About />
       <Projects />
       <Skills />
       <Education />
+      <About />
       <Contact />
     </main>
   );

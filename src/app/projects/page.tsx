@@ -1,7 +1,6 @@
 "use client";
 
-import ProjectCard from "@/components/ui/ProjectCard";
-import { ChromaGrid } from "@/components/ui/ChromaGrid";
+import ChromaGrid from "@/components/ui/ChromaGrid";
 
 const projects = [
 	{

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const routes = [
-  { name: "Home", path: "/about" },
+  { name: "Home", path: "/z" },
   { name: "About", path: "/about" },
   { name: "Skills", path: "/skills" },
   { name: "Projects", path: "/projects" },

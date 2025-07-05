@@ -1,19 +1,7 @@
-import { motion } from 'framer-motion';
+import { motion, Transition } from 'framer-motion';
 import { useEffect, useRef, useState, useMemo } from 'react';
 
-function buildKeyframes(from: Record<string, any>, steps: Record<string, any>[]): Record<string, any[]> {
-  const keys = new Set([
-    ...Object.keys(from),
-    ...steps.flatMap((s) => Object.keys(s)),
-  ]);
-  const keyframes: Record<string, any[]> = {};
-  keys.forEach((k) => {
-    keyframes[k] = [from[k], ...steps.map((s) => s[k])];
-  });
-  return keyframes;
-}
-
-interface BlurTextProps {
+type BlurTextProps = {
   text?: string;
   delay?: number;
   className?: string;
@@ -21,14 +9,30 @@ interface BlurTextProps {
   direction?: 'top' | 'bottom';
   threshold?: number;
   rootMargin?: string;
-  animationFrom?: Record<string, any>;
-  animationTo?: Record<string, any>[];
+  animationFrom?: Record<string, string | number>;
+  animationTo?: Array<Record<string, string | number>>;
   easing?: (t: number) => number;
   onAnimationComplete?: () => void;
   stepDuration?: number;
-}
+};
 
-const BlurText = ({
+const buildKeyframes = (
+  from: Record<string, string | number>,
+  steps: Array<Record<string, string | number>>
+): Record<string, Array<string | number>> => {
+  const keys = new Set<string>([
+    ...Object.keys(from),
+    ...steps.flatMap((s) => Object.keys(s)),
+  ]);
+
+  const keyframes: Record<string, Array<string | number>> = {};
+  keys.forEach((k) => {
+    keyframes[k] = [from[k], ...steps.map((s) => s[k])];
+  });
+  return keyframes;
+};
+
+const BlurText: React.FC<BlurTextProps> = ({
   text = '',
   delay = 200,
   className = '',
@@ -38,13 +42,13 @@ const BlurText = ({
   rootMargin = '0px',
   animationFrom,
   animationTo,
-  easing = (t: number) => t,
+  easing = (t) => t,
   onAnimationComplete,
   stepDuration = 0.35,
-}: BlurTextProps) => {
+}) => {
   const elements = animateBy === 'words' ? text.split(' ') : text.split('');
   const [inView, setInView] = useState(false);
-  const ref = useRef<HTMLParagraphElement | null>(null);
+  const ref = useRef<HTMLParagraphElement>(null);
 
   useEffect(() => {
     if (!ref.current) return;
@@ -52,14 +56,13 @@ const BlurText = ({
       ([entry]) => {
         if (entry.isIntersecting) {
           setInView(true);
-          if (ref.current) observer.unobserve(ref.current);
+          observer.unobserve(ref.current as Element);
         }
       },
       { threshold, rootMargin }
     );
     observer.observe(ref.current);
     return () => observer.disconnect();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [threshold, rootMargin]);
 
   const defaultFrom = useMemo(
@@ -94,22 +97,22 @@ const BlurText = ({
   return (
     <p
       ref={ref}
-      className={`blur-text ${className} flex flex-wrap`}
+      className={className}
+      style={{ display: 'flex', flexWrap: 'wrap' }}
     >
       {elements.map((segment, index) => {
         const animateKeyframes = buildKeyframes(fromSnapshot, toSnapshots);
 
-        const spanTransition = {
+        const spanTransition: Transition = {
           duration: totalDuration,
           times,
           delay: (index * delay) / 1000,
         };
-        // @ts-expect-error: ease is allowed by framer-motion
-        spanTransition.ease = easing;
-
+        if (easing) {
+          spanTransition.ease = easing;
+        }
         return (
           <motion.span
-            className="inline-block will-change-[transform,filter,opacity]"
             key={index}
             initial={fromSnapshot}
             animate={inView ? animateKeyframes : fromSnapshot}
@@ -117,6 +120,10 @@ const BlurText = ({
             onAnimationComplete={
               index === elements.length - 1 ? onAnimationComplete : undefined
             }
+            style={{
+              display: 'inline-block',
+              willChange: 'transform, filter, opacity',
+            }}
           >
             {segment === ' ' ? '\u00A0' : segment}
             {animateBy === 'words' && index < elements.length - 1 && '\u00A0'}

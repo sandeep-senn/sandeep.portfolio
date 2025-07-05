@@ -1,6 +1,9 @@
-import { useRef, useEffect } from "react";
+"use client";
+
+import { useRef, useEffect, PointerEvent, MouseEvent } from "react";
 import { gsap } from "gsap";
 import "./ChromaGrid.css";
+import Image from "next/image";
 
 type ChromaGridItem = {
   image: string;
@@ -24,7 +27,7 @@ type ChromaGridProps = {
   ease?: string;
 };
 
-export const ChromaGrid = ({
+const ChromaGrid = ({
   items,
   className = "",
   radius = 300,
@@ -35,12 +38,12 @@ export const ChromaGrid = ({
   ease = "power3.out",
 }: ChromaGridProps) => {
   const rootRef = useRef<HTMLDivElement>(null);
-  const fadeRef = useRef(null);
+  const fadeRef = useRef<HTMLDivElement>(null);
   const setX = useRef<((value: number) => void) | null>(null);
   const setY = useRef<((value: number) => void) | null>(null);
-  const pos = useRef({ x: 0, y: 0 });
+  const pos = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
 
-  const demo = [
+  const demo: ChromaGridItem[] = [
     {
       image: "https://i.pravatar.cc/300?img=8",
       title: "Alex Rivera",
@@ -96,6 +99,7 @@ export const ChromaGrid = ({
       url: "https://aws.amazon.com/",
     },
   ];
+
   const data = items?.length ? items : demo;
 
   useEffect(() => {
@@ -103,8 +107,8 @@ export const ChromaGrid = ({
     if (!el) return;
     const setXRaw = gsap.quickSetter(el, "--x", "px");
     const setYRaw = gsap.quickSetter(el, "--y", "px");
-    setX.current = (value: number) => { setXRaw(value); };
-    setY.current = (value: number) => { setYRaw(value); };
+    setX.current = (value: number) => setXRaw(value);
+    setY.current = (value: number) => setYRaw(value);
     const { width, height } = el.getBoundingClientRect();
     pos.current = { x: width / 2, y: height / 2 };
     setX.current(pos.current.x);
@@ -125,28 +129,30 @@ export const ChromaGrid = ({
     });
   };
 
-  const handleMove = (e: React.PointerEvent<HTMLDivElement>) => {
+  const handleMove = (e: PointerEvent<HTMLDivElement>) => {
     if (!rootRef.current) return;
     const r = rootRef.current.getBoundingClientRect();
     moveTo(e.clientX - r.left, e.clientY - r.top);
-    gsap.to(fadeRef.current, { opacity: 0, duration: 0.25, overwrite: true });
-  };
-
-  const handleLeave = () => {
-    gsap.to(fadeRef.current, {
-      opacity: 1,
-      duration: fadeOut,
-      overwrite: true,
-    });
-  };
-
-  const handleCardClick = (url: string) => {
-    if (url) {
-      window.open(url, "_blank", "noopener,noreferrer");
+    if (fadeRef.current) {
+      gsap.to(fadeRef.current, { opacity: 0, duration: 0.25, overwrite: true });
     }
   };
 
-  const handleCardMove = (e: React.MouseEvent<HTMLElement>) => {
+  const handleLeave = () => {
+    if (fadeRef.current) {
+      gsap.to(fadeRef.current, {
+        opacity: 1,
+        duration: fadeOut,
+        overwrite: true,
+      });
+    }
+  };
+
+  const handleCardClick = (url?: string) => {
+    if (url) window.open(url, "_blank", "noopener,noreferrer");
+  };
+
+  const handleCardMove = (e: MouseEvent<HTMLElement>) => {
     const card = e.currentTarget as HTMLElement;
     const rect = card.getBoundingClientRect();
     const x = e.clientX - rect.left;
@@ -161,18 +167,15 @@ export const ChromaGrid = ({
       className={`chroma-grid ${className}`}
       style={
         {
-          // @ts-ignore
           "--r": `${radius}px`,
-          // @ts-ignore
           "--cols": columns,
-          // @ts-ignore
           "--rows": rows,
         } as React.CSSProperties
       }
       onPointerMove={handleMove}
       onPointerLeave={handleLeave}
     >
-      {data.map((c: any, i: number) => (
+      {data.map((c, i) => (
         <article
           key={i}
           className="chroma-card"
@@ -180,16 +183,20 @@ export const ChromaGrid = ({
           onClick={() => handleCardClick(c.url)}
           style={
             {
-              // @ts-ignore
               "--card-border": c.borderColor || "transparent",
-              // @ts-ignore
               "--card-gradient": c.gradient,
               cursor: c.url ? "pointer" : "default",
             } as React.CSSProperties
           }
         >
           <div className="chroma-img-wrapper">
-            <img src={c.image} alt={c.title} loading="lazy" />
+            <Image
+              src={c.image}
+              alt={c.title}
+              width={180}
+              height={120}
+              style={{ objectFit: "cover", borderRadius: "1rem" }}
+            />
           </div>
           <footer className="chroma-info">
             <h3 className="name">{c.title}</h3>
