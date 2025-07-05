@@ -51,6 +51,7 @@
   overflow: hidden;
   border: 1.5px solid #333;
   transition: border-color 0.3s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  background: var(--card-gradient, linear-gradient(145deg, #2563eb, #000));
   --mouse-x: 50%;
   --mouse-y: 50%;
   --spotlight-color: rgba(255, 255, 255, 0.3);
