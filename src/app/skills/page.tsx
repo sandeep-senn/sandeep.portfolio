@@ -16,6 +16,11 @@ import {
   SiNextdotjs,
   SiExpress,
   SiMysql,
+  SiTypescript,
+  SiVite,
+  SiPinterest,
+  SiRedux,
+  SiClerk
 } from "react-icons/si";
 
 const skills = [
@@ -23,17 +28,22 @@ const skills = [
   { icon: SiCss3, name: "CSS", color: "#264de4" },
   { icon: SiJavascript, name: "JavaScript", color: "#f0db4f" },
   { icon: SiReact, name: "React", color: "#61dbfb" },
+  { icon: SiTypescript, name: "TypeScript", color: "#00758F" },
   { icon: SiTailwindcss, name: "Tailwind", color: "#38bdf8" },
+  { icon: SiWordpress, name: "WordPress", color: "#21759b" },
   { icon: SiMongodb, name: "MongoDB", color: "#47A248" },
   { icon: SiNodedotjs, name: "Node.js", color: "#68A063" },
   { icon: SiFramer, name: "Framer", color: "#0055FF" },
+  { icon: SiMysql, name: "MySQL", color: "#00758F" },
+  { icon: SiClerk, name: "Clerk", color: "#00758F" },
   { icon: SiGithub, name: "GitHub", color: "#ffffff" },
   { icon: SiGit, name: "Git", color: "#F05032" },
   { icon: SiPostman, name: "Postman", color: "#FF6C37" },
-  { icon: SiWordpress, name: "WordPress", color: "#21759b" },
   { icon: SiNextdotjs, name: "Next.js", color: "#ffffff" },
   { icon: SiExpress, name: "Express", color: "#ffffff" },
-  { icon: SiMysql, name: "SQL", color: "#00758F" },
+  { icon: SiVite, name: "Vite", color: "#00758F" },
+  { icon: SiPinterest, name: "Pinterest", color: "#00758F" },
+  { icon: SiRedux, name: "Redux", color: "#00758F" },
 ];
 
 export default function Skills() {

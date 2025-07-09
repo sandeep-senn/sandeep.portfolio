@@ -2,11 +2,25 @@
 
 const projects = [
   {
-    title: "GoldLace",
-    description: "Landing page for GoldLacee, a fashion store.",
+    title: "AI Mentor Platform",
+    description: "Personalized AI for Code Debugging, Code Converting with AI chatBOT",
+    image: "/Mentor.png",
+    link: "https://github.com/sandeep-senn/AI-Powered-Mentor-Platform",
+    live: "https://ai-powered-mentor-platform-bven.vercel.app/",
+  },
+  {
+    title: "Fashify",
+    description: "Landing page for a fashion store.",
     image: "/gold.png",
-    link: "https://github.com/sandeep-senn/E---Commerce",
-    live: "https://e-commerce-one-gamma-79.vercel.app/",
+    link: "https://github.com/sandeep-senn/Fashify",
+    live: "https://e-commerce-sandeep-sen.vercel.app/",
+  },
+  {
+    title: "GoldLace",
+    description: "E commerce platform for digital jewellery products.",
+    image: "/GoldLace.png",
+    link: "https://github.com/sandeep-senn/GoldLace",
+    live: "https://gold-lace.vercel.app/",
   },
   {
     title: "Be Productive",
@@ -14,13 +28,6 @@ const projects = [
     image: "/prod.png",
     link: "https://github.com/sandeep-senn/Be-Productive",
     live: "https://be-productive-one.vercel.app/",
-  },
-  {
-    title: "AI Mentor Platform",
-    description: "Personalized AI for Code Debugging, Code Converting with AI chatBOT",
-    image: "/Mentor.png",
-    link: "https://github.com/sandeep-senn/AI-Powered-Mentor-Platform",
-    live: "https://ai-powered-mentor-platform-bven.vercel.app/",
   },
   {
     title: "Jarvis AI",
