@@ -27,12 +27,12 @@ const skills = [
   { icon: SiMongodb, name: "MongoDB", color: "#47A248" },
   { icon: SiNodedotjs, name: "Node.js", color: "#68A063" },
   { icon: SiFramer, name: "Framer", color: "#0055FF" },
-  { icon: SiGithub, name: "GitHub", color: "#181717" },
+  { icon: SiGithub, name: "GitHub", color: "#ffffff" },
   { icon: SiGit, name: "Git", color: "#F05032" },
   { icon: SiPostman, name: "Postman", color: "#FF6C37" },
   { icon: SiWordpress, name: "WordPress", color: "#21759b" },
-  { icon: SiNextdotjs, name: "Next.js", color: "#000000" },
-  { icon: SiExpress, name: "Express", color: "#404d59" },
+  { icon: SiNextdotjs, name: "Next.js", color: "#ffffff" },
+  { icon: SiExpress, name: "Express", color: "#ffffff" },
   { icon: SiMysql, name: "SQL", color: "#00758F" },
 ];
 

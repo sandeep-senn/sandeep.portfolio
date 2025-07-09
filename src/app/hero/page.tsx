@@ -113,7 +113,7 @@ const Hero = () => {
               <FaLinkedin className="hover:scale-110 transition text-black" />
             </a>
             <a
-              href="https://leetcode.com/sandeep_your_id"
+              href="https://leetcode.com/sandeep_sen"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:scale-110 transition"
