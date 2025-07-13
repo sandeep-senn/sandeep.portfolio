@@ -18,7 +18,7 @@ const projects = [
   {
     title: "GoldLace",
     description: "E commerce platform for digital jewellery products.",
-    image: "/GoldLace.png",
+    image: "/goldlace.png",
     link: "https://github.com/sandeep-senn/GoldLace",
     live: "https://gold-lace.vercel.app/",
   },

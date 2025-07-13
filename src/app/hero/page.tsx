@@ -80,7 +80,7 @@ const Hero = () => {
                 delay={150}
                 animateBy="words"
                 direction="top"
-                className="text-7xl text-black mb-1"
+                className="md:text-7xl text-3xl text-black mb-1"
               />
             </div>
           </h1>
