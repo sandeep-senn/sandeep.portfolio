@@ -148,9 +148,11 @@ const Hero = () => {
             whileHover={{ scale: 1.05 }}
             className="mt-10 bg-gradient-to-r from-blue-600 to-blue-800 rounded-full p-1"
           >
-            <Button className="px-8 py-2 text-lg rounded-full bg-white text-blue-700 font-bold shadow-xl hover:brightness-110">
-              Let’s Connect
-            </Button>
+            <a href="/Sandeep_Sen.pdf" download>
+              <Button className="px-8 py-2 text-lg rounded-full bg-white text-blue-700 font-bold shadow-xl hover:brightness-110">
+                Download Resume
+              </Button>
+            </a>
           </motion.div>
         </div>
       </section>
