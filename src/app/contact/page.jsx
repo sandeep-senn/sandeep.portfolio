@@ -21,7 +21,8 @@ export default function ContactPage() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-lg text-gray-900 mb-12"
         >
-          Have a project, idea, or just want to chat? Fill out the form below and let’s connect!
+          Have a project, idea, or just want to chat? Fill out the form below
+          and let’s connect!
         </motion.p>
 
         <motion.form
@@ -45,12 +46,14 @@ export default function ContactPage() {
             placeholder="Your Message"
             className="w-full px-5 py-3 bg-white/5 border border-black/10 rounded-xl text-white placeholder-gray-400 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
-          <button
-            type="submit"
-            className="w-full bg-blue-600 hover:bg-blue-700 transition px-6 py-3 rounded-xl text-white font-semibold shadow-md"
+          <a
+            href="https://wa.me/917222939004?text=Hi%20Sandeep%2C%20I%20visited%20your%20portfolio!"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full block text-center bg-blue-600 hover:bg-blue-700 transition px-6 py-3 rounded-xl text-white font-semibold shadow-md"
           >
             Send Message
-          </button>
+          </a>
         </motion.form>
       </div>
     </section>
